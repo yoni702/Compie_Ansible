@@ -1,0 +1,14 @@
+-name:Configure new developer user consistently
+ host:prod,dev
+ become:true
+ tasks:
+  -name:Create Group developers
+   group:
+    name:developers
+    state:present
+
+  -name:Developer user persist
+   user:
+    name:steve
+    groups:developers
+    state:present

@@ -1,0 +1,19 @@
+---
+ - name: Install and start Apache 2
+   host: dev
+   become: true
+   tasks:
+     - name: Install latest version of Apache
+       apt:
+         name: apache2
+         update_cache: yes
+         state: latest
+     - name: Copy HTML file to slaves
+       copy:
+         src: /tmp/index.html
+         dest: /var/www/html/index.html
+     - name: Start and enable Apache2 service
+       service:
+         name: apache2
+         enabled: true
+         state: restarted
